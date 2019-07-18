@@ -1,6 +1,138 @@
 // Load application styles
 import 'styles/index.less';
 
-// ================================
-// START YOUR APP HERE
-// ================================
+const $numberOfElements = document.querySelector('.get-number-of-elements');
+const $plusBtn = document.querySelector('.plus');
+const $minusBtn = document.querySelector('.minus');
+const $bubbleSortBtn = document.querySelector('.bubble-btn');
+const $quickSortBtn = document.querySelector('.quick-btn');
+const $startBtn = document.querySelector('.start-btn');
+const $actionBox = document.querySelector('.action-box');
+
+let selectedSort;
+const swapedArray = [];
+
+(function () {
+  const initialElements = $numberOfElements.textContent;
+  for (let i = 0; i < initialElements; i++) {
+    const inputEl = document.createElement('input');
+    inputEl.type = 'number';
+    $actionBox.appendChild(inputEl);
+  }
+})();
+
+$plusBtn.addEventListener('click', () => {
+  if ($numberOfElements.textContent < 10) {
+    $numberOfElements.textContent++;
+    createElements($numberOfElements.textContent);
+  }
+});
+
+$minusBtn.addEventListener('click', () => {
+  if ($numberOfElements.textContent > 5) {
+    $numberOfElements.textContent--;
+    createElements($numberOfElements.textContent);
+  }
+});
+
+function createElements(numOfElements) {
+  while ($actionBox.firstChild) {
+    $actionBox.removeChild($actionBox.firstChild);
+  }
+  for (let i = 0; i < numOfElements; i++) {
+    const inputEl = document.createElement('input');
+    inputEl.type = 'number';
+    inputEl.className = 'element';
+    $actionBox.appendChild(inputEl);
+  }
+}
+
+$bubbleSortBtn.addEventListener('click', (e) => {
+  selectedSort = 'bubble';
+  showSelectedElement(e.target);
+});
+$quickSortBtn.addEventListener('click', (e) => {
+  selectedSort = 'quick';
+  showSelectedElement(e.target);
+});
+
+function showSelectedElement(targetedElement) {
+  targetedElement.style.backgroundColor = '#fd2020';
+}
+
+$startBtn.addEventListener('click', (e) => {
+  const initialElementsNumber = +$numberOfElements.textContent;
+  const elementsList = $actionBox.childNodes
+  if (elementsList.length === initialElementsNumber) {
+    for (let i = 0; i < elementsList.length; i++) {
+      if (!elementsList[i].value) alert('숫자 넣어 임마!');
+      break;
+    }
+    changeElementsStatus(elementsList);
+    $startBtn.style.visibility = 'hidden';
+    if (selectedSort === 'bubble') bubbleSort($actionBox.children);
+    else alert('솔트 클릭해 임마!');
+  }
+});
+
+function changeElementsStatus(inputList) {
+  const len = inputList.length;
+  const elementsValue = [];
+  for (let j = 0; j < len; j++) {
+    elementsValue.push(inputList[j].value);
+  }
+  while ($actionBox.firstChild) {
+    $actionBox.removeChild($actionBox.firstChild);
+  }
+  for (let i = 0; i < len; i++) {
+    const divList = document.createElement('div');
+    divList.className = `element${elementsValue[i]}`;
+    divList.dataset.value = elementsValue[i];
+    divList.textContent = elementsValue[i];
+    divList.style.left = 50 * (i + 1);
+    $actionBox.appendChild(divList);
+  }
+}
+
+function swapAnimation(swapedArray) {
+  let time = 500;
+  for (let i = 0; i < swapedArray.length; i++) {
+    const changeEl1 = document.querySelector(`.element${swapedArray[i][0]}`);
+    const changeEl2 = document.querySelector(`.element${swapedArray[i][1]}`);
+    setTimeout(() => {
+      changeEl1.style.backgroundColor = '#7b6fec';
+      changeEl2.style.backgroundColor = '#7b6fec';
+    }, time);
+    setTimeout(() => {
+      $actionBox.insertBefore(changeEl2, changeEl1)
+    }, time + 500);
+    setTimeout(() => {
+      changeEl1.style.backgroundColor = '#45f7aa';
+      changeEl2.style.backgroundColor = '#45f7aa';
+    }, time + 1000);
+    time += 1500;
+  }
+  $startBtn.style.visibility = 'visible';
+}
+
+function bubbleSort(elementNodeList) {
+  const arr = [];
+  for (let i = 0; i < elementNodeList.length; i++) {
+    arr.push(+elementNodeList[i].dataset.value);
+  }
+  for (let outer = arr.length; outer >= 2; outer--) {
+    for (let inner = 0; inner <= outer - 2; inner++) {
+      if (+arr[inner] > +arr[inner + 1]) {
+        swapedArray.push([arr[inner], arr[inner + 1]]);
+        swap(arr, inner, inner + 1);
+      }
+    }
+  }
+  swapAnimation(swapedArray);
+}
+
+function swap(arr, left, right) {
+  const temp = arr[left];
+  arr[left] = arr[right];
+  arr[right] = temp;
+}

@@ -1,13 +1,37 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
+
 <body>
-  <div class="content">
-    <h1>Boilerplate</h1>
-  </div>
+  <header>
+    <div>Sort Algoritm Visualization</div>
+  </header>
+
+  <section>
+    <div class="get-number-box">
+      <div class="setting">
+        <div class="get-number-of-elements">5</div>
+        <div class="chage-elements-btns">
+          <button class="plus">+</button>
+          <button class="minus">-</button>
+        </div>
+        <div class="sort-btns">
+          <button class="bubble-btn">Bubble Sort</button>
+          <button class="quick-btn">Quick Sort</button>
+        </div>
+        <button class="start-btn">Go!</button>
+      </div>
+    </div>
+
+    <div class="action-box"></div>
+
+  </section>
+
 </body>
+
 </html>

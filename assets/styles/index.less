@@ -1,9 +1,177 @@
 // Apply a natural box layout model to all elements
 // but allowing components to change
 // http://www.paulirish.com/2012/box-sizing-border-box-ftw/
-html, body {
+html,
+body {
   box-sizing: border-box;
+  background-color: rgb(83, 83, 83);
 }
-*, *:before, *:after {
+
+*,
+*:before,
+*:after {
   box-sizing: inherit;
+}
+
+header>div {
+  padding: 20px 0 6px 50px;
+  font-size: 40px;
+  color: wheat; 
+}
+
+section {
+  margin: 0 auto;
+}
+
+.get-number-box {
+  text-align: center;
+}
+
+.action-box {
+  width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  // position: relative;
+}
+
+.action-box>input {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  margin: 10px;
+  outline: 0;
+  border: 0;
+  border-radius: 18px;
+  display: inline-block;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+  background-color: #45f7aa;
+}
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.action-box>div {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  margin: 10px;
+  outline: 0;
+  border: 0;
+  border-radius: 18px;
+  // position: absolute;
+  display: inline-block;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+  background-color: #45f7aa;
+}
+
+.setting {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.setting>.get-number-of-elements {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  margin: 10px;
+  outline: 0;
+  border: 0;
+  border-radius: 8px;
+  display: inline-block;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+  background-color: #ffffff;
+}
+
+.chage-elements-btns {
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+
+}
+
+.plus {
+  width: 40px;
+  height: 16px;
+  outline: 0;
+  border: 0;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: black;
+  background-color: #6485f1;
+  display: block;
+  margin: 5px 0 5px 0;
+}
+
+.minus {
+  width: 40px;
+  height: 16px;
+  outline: 0;
+  border: 0;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: black;
+  background-color: #6485f1;
+  display: block;
+  margin: 5px 0 5px 0;
+}
+
+.sort-btns {
+  display: inline-block;
+}
+
+.bubble-btn {
+  width: 150px;
+  height: 50px;
+  margin: 10px;
+  border: 0;
+  border-radius: 8px;
+  outline: 0;
+  text-align: center;
+  font-size: 21px;
+  font-weight: bold;
+  color: black;
+  background-color: #f76945;
+}
+
+.quick-btn {
+  width: 150px;
+  height: 50px;
+  margin: 10px;
+  border: 0;
+  border-radius: 8px;
+  outline: 0;
+  text-align: center;
+  font-size: 21px;
+  font-weight: bold;
+  color: black;
+  background-color: #f76945;
+}
+
+.start-btn {
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border: 0;
+  border-radius: 8px;
+  outline: 0;
+  text-align: center;
+  font-size: 21px;
+  font-weight: bold;
+  color: whitesmoke;
+  background-color: #000000;
+  visibility: visible;
 }
