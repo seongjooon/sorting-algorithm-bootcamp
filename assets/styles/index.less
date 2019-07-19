@@ -15,7 +15,8 @@ body {
 
 header>div {
   padding: 20px 0 6px 50px;
-  font-size: 40px;
+  font-size: 60px;
+  font-weight: bold;
   color: wheat; 
 }
 
@@ -25,18 +26,19 @@ section {
 
 .get-number-box {
   text-align: center;
+  margin: 70px;
 }
 
-.action-box {
-  width: 700px;
+.first-box {
+  width: 100%;
+  height: 100px;
   margin: 0 auto;
   text-align: center;
-  // position: relative;
 }
 
-.action-box>input {
-  width: 50px;
-  height: 50px;
+.first-box>input {
+  width: 90px;
+  height: 90px;
   padding: 10px;
   margin: 10px;
   outline: 0;
@@ -44,7 +46,7 @@ section {
   border-radius: 18px;
   display: inline-block;
   text-align: center;
-  font-size: 25px;
+  font-size: 60px;
   font-weight: bold;
   color: black;
   background-color: #45f7aa;
@@ -54,7 +56,30 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.action-box>div {
+.first-box>div {
+  width: 90px;
+  height: 90px;
+  padding: 10px;
+  margin: 10px;
+  outline: 0;
+  border: 0;
+  border-radius: 18px;
+  display: inline-block;
+  text-align: center;
+  font-size: 60px;
+  font-weight: bold;
+  color: black;
+  background-color: #45f7aa;
+}
+
+.pivot-box {
+  width: 100%;
+  height: 100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pivot-box>div {
   width: 50px;
   height: 50px;
   padding: 10px;
@@ -62,13 +87,37 @@ input::-webkit-inner-spin-button {
   outline: 0;
   border: 0;
   border-radius: 18px;
-  // position: absolute;
   display: inline-block;
   text-align: center;
   font-size: 25px;
   font-weight: bold;
   color: black;
   background-color: #45f7aa;
+  visibility: hidden;
+}
+
+.second-box {
+  width: 100%;
+  height: 100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.second-box>div {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  margin: 10px;
+  outline: 0;
+  border: 0;
+  border-radius: 18px;
+  display: inline-block;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+  background-color: #45f7aa;
+  visibility: hidden;
 }
 
 .setting {

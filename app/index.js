@@ -7,7 +7,9 @@ const $minusBtn = document.querySelector('.minus');
 const $bubbleSortBtn = document.querySelector('.bubble-btn');
 const $quickSortBtn = document.querySelector('.quick-btn');
 const $startBtn = document.querySelector('.start-btn');
-const $actionBox = document.querySelector('.action-box');
+const $firstBox = document.querySelector('.first-box');
+const $pivotBox = document.querySelector('.pivot-box');
+const $secondBox = document.querySelector('.second-box');
 
 let selectedSort;
 const swapedArray = [];
@@ -17,8 +19,9 @@ const swapedArray = [];
   for (let i = 0; i < initialElements; i++) {
     const inputEl = document.createElement('input');
     inputEl.type = 'number';
-    $actionBox.appendChild(inputEl);
+    $firstBox.appendChild(inputEl);
   }
+
 })();
 
 $plusBtn.addEventListener('click', () => {
@@ -36,14 +39,14 @@ $minusBtn.addEventListener('click', () => {
 });
 
 function createElements(numOfElements) {
-  while ($actionBox.firstChild) {
-    $actionBox.removeChild($actionBox.firstChild);
+  while ($firstBox.firstChild) {
+    $firstBox.removeChild($firstBox.firstChild);
   }
   for (let i = 0; i < numOfElements; i++) {
     const inputEl = document.createElement('input');
     inputEl.type = 'number';
     inputEl.className = 'element';
-    $actionBox.appendChild(inputEl);
+    $firstBox.appendChild(inputEl);
   }
 }
 
@@ -62,35 +65,46 @@ function showSelectedElement(targetedElement) {
 
 $startBtn.addEventListener('click', (e) => {
   const initialElementsNumber = +$numberOfElements.textContent;
-  const elementsList = $actionBox.childNodes
+  const elementsList = $firstBox.childNodes
   if (elementsList.length === initialElementsNumber) {
     for (let i = 0; i < elementsList.length; i++) {
       if (!elementsList[i].value) alert('숫자 넣어 임마!');
       break;
     }
-    changeElementsStatus(elementsList);
+    createNewElements(elementsList);
     $startBtn.style.visibility = 'hidden';
-    if (selectedSort === 'bubble') bubbleSort($actionBox.children);
+    if (selectedSort === 'bubble') bubbleSort($firstBox.children);
     else alert('솔트 클릭해 임마!');
   }
 });
 
-function changeElementsStatus(inputList) {
+function createNewElements(inputList) {
   const len = inputList.length;
   const elementsValue = [];
+  const pivotElement = document.createElement('div');
+
+  pivotElement.className = 'pivot';
+  $pivotBox.appendChild(pivotElement);
+
   for (let j = 0; j < len; j++) {
     elementsValue.push(inputList[j].value);
   }
-  while ($actionBox.firstChild) {
-    $actionBox.removeChild($actionBox.firstChild);
+  while ($firstBox.firstChild) {
+    $firstBox.removeChild($firstBox.firstChild);
   }
   for (let i = 0; i < len; i++) {
-    const divList = document.createElement('div');
-    divList.className = `element${elementsValue[i]}`;
-    divList.dataset.value = elementsValue[i];
-    divList.textContent = elementsValue[i];
-    divList.style.left = 50 * (i + 1);
-    $actionBox.appendChild(divList);
+    const firstLineEl = document.createElement('div');
+    const secondLineEL = document.createElement('div');
+
+    firstLineEl.className = `element${elementsValue[i]}`;
+    firstLineEl.dataset.value = elementsValue[i];
+    firstLineEl.textContent = elementsValue[i];
+    firstLineEl.style.left = 50 * (i + 1);
+    $firstBox.appendChild(firstLineEl);
+
+    secondLineEL.dataset.id  = i;
+    secondLineEL.style.left = 50 * (i + 1);
+    $secondBox.appendChild(secondLineEL);
   }
 }
 
@@ -104,7 +118,7 @@ function swapAnimation(swapedArray) {
       changeEl2.style.backgroundColor = '#7b6fec';
     }, time);
     setTimeout(() => {
-      $actionBox.insertBefore(changeEl2, changeEl1)
+      $firstBox.insertBefore(changeEl2, changeEl1)
     }, time + 500);
     setTimeout(() => {
       changeEl1.style.backgroundColor = '#45f7aa';
@@ -135,4 +149,44 @@ function swap(arr, left, right) {
   const temp = arr[left];
   arr[left] = arr[right];
   arr[right] = temp;
+}
+
+const swapedArr = [];
+swapedArr.push({ type: 'start' });
+
+function quickSort(elementNodeList) {
+  if (elementNodeList.length === 0) return [];
+
+  const arr = [];
+  for (let i = 0; i < elementNodeList.length; i++) {
+    arr.push(+elementNodeList[i].dataset.value);
+  }
+
+  const lesser = [];
+  const greater = [];
+  const [pivot, ...compareArr] = arr;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < pivot) lesser.push(arr[i]);
+    if (arr[i] > pivot) greater.push(arr[i]);
+  }
+
+  const curResultArr = lesser.concat(pivot, greater);
+  swapedArr.push({ type: 'select-pivot', pivot });
+
+  for (let k = 0; k < [...compareArr].length; k++) {
+    const resultIndex = curResultArr.indexOf([...compareArr][k])
+    swapedArr.push({ type: 'compare', compareArr: [...compareArr][k] });
+    swapedArr.push({ type: 'swap', swapArr: [[...compareArr][k], resultIndex] });
+  }
+  for (let j = 0; j < [...compareArr].length; j++) {
+    var movedPivot = curResultArr.indexOf(pivot)
+  }
+
+  swapedArr.push({ type: 'swap', swapArr: [pivot, movedPivot] });
+  swapedArr.push({ type: 'result', curResultArr: curResultArr });
+  swapedArr.push({ type: 'end' });
+  swapedArr.push({ type: 'start' });
+
+  return quickSort(lesser).concat(pivot, quickSort(greater));
 }
