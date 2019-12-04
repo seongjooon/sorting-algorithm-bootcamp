@@ -9,7 +9,7 @@
     "start": "cross-env NODE_ENV=dev webpack-dev-server --progress --mode development --config webpack.config.dev.js"
   },
   "dependencies": {
-    "lodash": "4.17.11"
+    "lodash": "4.17.13"
   },
   "devDependencies": {
     "@babel/core": "7.1.0",
